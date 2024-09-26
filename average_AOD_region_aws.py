@@ -16,8 +16,8 @@ import rasterio
 #import pyproj
 #from osgeo import gdal, osr
 
-pathInput = '/datawork/fires_data/bandas_productos_y_compuestos_goes16/09_productos_geo_mex/AOD/2018/'
-pathOutput = '/data/tmp/AOD_average/geotiff/2018/'
+pathInput = '/datawork/fires_data/bandas_productos_y_compuestos_goes16/09_productos_geo_mex/AOD/2023/'
+pathOutput = '/data/tmp/AOD_average/geotiff/2023/'
 pathTmp = '/data/tmp/AOD_average/tmp/'
 pathRegion = '/home/urielm/AOD_average/data/region/Municipios/Municipios_MM.shp'
 pathRef = '/home/urielm/AOD_average/data/ref/ref_AOD.tif'
@@ -58,7 +58,7 @@ for dirFile in dirFiles:
     print('Processing files... ')
     for file in files:    
         #print("Processing file: ", file)
-        # Obtain the date from the file name from this format "s20203632156180"
+        # Obtain the date from the file name from this format "s20233632156180"
         date = file.split('/')[-1].split('_')[4]
         date = datetime.datetime.strptime(date, 's%Y%m%d')
         time = file.split('/')[-1].split('_')[7]

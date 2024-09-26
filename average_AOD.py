@@ -37,7 +37,7 @@ def obtainDate(file):
     return date
 
 def obtainDateMonth(file):
-    #CG_ABI-L2-AODC-avr-M6_G16_2020132.tif
+    #CG_ABI-L2-AODC-avr-M6_G16_2023132.tif
     date = file.split('/')[-1].split('_')[3].split('.')[0]
     date = datetime.datetime.strptime(date, '%Y%j')
     return date
@@ -101,9 +101,9 @@ def main(interval):
     if interval == 'day':
         pathInput = '/data/tmp/AOD_average/geotiff/'
     elif interval == 'month':
-        pathInput = '/data/tmp/AOD_average/averages/day/2018/geotiff/'
+        pathInput = '/data/tmp/AOD_average/averages/day/2023/geotiff/'
     elif interval == 'year':
-        pathInput = '/data/tmp/AOD_average/averages/month/2018/geotiff/'
+        pathInput = '/data/tmp/AOD_average/averages/month/2023/geotiff/'
     pathOutput = '/data/tmp/AOD_average/averages/'
     pathTmp = '/data/tmp/AOD_average/tmp/'
     pathRef = '/home/urielm/AOD_average/data/ref/ref_AOD.tif'
@@ -112,7 +112,7 @@ def main(interval):
 
     # List all files in the input directory
     if interval == 'day':
-        files = glob(pathInput + '2018/*.tif')
+        files = glob(pathInput + '2023/*.tif')
     elif interval == 'month':
         files = glob(pathInput + '*.tif')
     elif interval == 'year':
@@ -127,7 +127,7 @@ def main(interval):
         filesDate = filesMonths(files)
     elif interval == 'year':
         filesDate = {}
-        filesDate['2018'] = files
+        filesDate['2023'] = files
 
     # Loop over files from a same day
     print('Processing files... ')
@@ -218,15 +218,15 @@ def main(interval):
         #plt.show()
         # Add title
         if interval == 'day' or interval == 'month':
-            plt.title('Average AOD 2018' + date)
+            plt.title('Average AOD 2023' + date)
         elif interval == 'year':
-            plt.title('Average AOD 2018')
+            plt.title('Average AOD 2023')
         if interval == 'day':
-            filename = pathOutput + 'day/2018/png/' + 'CG_ABI-L2-AODC-avr-M6_G16_2018' + date + '.png'
+            filename = pathOutput + 'day/2023/png/' + 'CG_ABI-L2-AODC-avr-M6_G16_2023' + date + '.png'
         elif interval == 'month':
-            filename = pathOutput + 'month/2018/png/' + 'CG_ABI-L2-AODC-avr-M6_G16_2018' + date + '.png'
+            filename = pathOutput + 'month/2023/png/' + 'CG_ABI-L2-AODC-avr-M6_G16_2023' + date + '.png'
         elif interval == 'year':
-            filename = pathOutput + 'year/2018/png/' + 'CG_ABI-L2-AODC-avr-M6_G16_2018.png'
+            filename = pathOutput + 'year/2023/png/' + 'CG_ABI-L2-AODC-avr-M6_G16_2023.png'
         plt.savefig(filename)
         plt.close()
 
@@ -236,11 +236,11 @@ def main(interval):
             crs = src.crs
             transform = src.transform
         if interval == 'day':
-            filename = pathOutput + 'day/2018/geotiff/' + 'CG_ABI-L2-AODC-avr-M6_G16_2018' + date + '.tif'
+            filename = pathOutput + 'day/2023/geotiff/' + 'CG_ABI-L2-AODC-avr-M6_G16_2023' + date + '.tif'
         elif interval == 'month':
-            filename = pathOutput + 'month/2018/geotiff/' + 'CG_ABI-L2-AODC-avr-M6_G16_2018' + date + '.tif'
+            filename = pathOutput + 'month/2023/geotiff/' + 'CG_ABI-L2-AODC-avr-M6_G16_2023' + date + '.tif'
         elif interval == 'year':
-            filename = pathOutput + 'year/2018/geotiff/' + 'CG_ABI-L2-AODC-avr-M6_G16_2018.tif'
+            filename = pathOutput + 'year/2023/geotiff/' + 'CG_ABI-L2-AODC-avr-M6_G16_2023.tif'
         with rasterio.open(filename, 'w', driver='GTiff', height=f, width=c, count=1,
         dtype=aod_avg.dtype, crs=crs, transform=transform) as dst:
             dst.write(aod_avg, 1)
